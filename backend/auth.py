@@ -4,6 +4,7 @@ import jwt
 import datetime
 from database import mongo
 from bson.objectid import ObjectId
+from models import User
 
 def generate_token(user_id, username, secret_key):
     """Generate JWT token for user authentication"""
@@ -39,9 +40,7 @@ def register_user():
             return jsonify({'error': 'Password must be at least 6 characters long'}), 400
 
         # Check if user already exists
-        existing_user = mongo.db.users.find_one({
-            '$or': [{'username': username}, {'email': email}]
-        })
+        existing_user = User.objects(__raw__={'$or': [{'username': username}, {'email': email}]}).first()
         
         if existing_user:
             return jsonify({'error': 'Username or email already exists'}), 409
@@ -49,15 +48,9 @@ def register_user():
         password_hash = generate_password_hash(password)
 
         # Create new user
-        user_data = {
-            'username': username,
-            'email': email,
-            'password_hash': password_hash,
-            'created_at': datetime.datetime.utcnow()
-        }
-        
-        result = mongo.db.users.insert_one(user_data)
-        user_id = result.inserted_id
+        user = User(username=username, email=email, password_hash=password_hash)
+        user.save()
+        user_id = user.id
         
         # Generate token
         from flask import current_app
@@ -83,19 +76,19 @@ def login_user():
             return jsonify({'error': 'Username and password are required'}), 400
 
         # Find user by username
-        user = mongo.db.users.find_one({'username': username})
+        user = User.objects(username=username).first()
 
-        if user and check_password_hash(user['password_hash'], password):
+        if user and check_password_hash(user.password_hash, password):
             from flask import current_app
-            token = generate_token(user['_id'], user['username'], current_app.config['SECRET_KEY'])
+            token = generate_token(user.id, user.username, current_app.config['SECRET_KEY'])
             
             return jsonify({
                 'message': 'Login successful',
                 'token': token,
                 'user': {
-                    'id': str(user['_id']), 
-                    'username': user['username'], 
-                    'email': user['email']
+                    'id': str(user.id), 
+                    'username': user.username, 
+                    'email': user.email
                 }
             }), 200
         else:

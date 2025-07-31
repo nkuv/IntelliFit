@@ -7,6 +7,7 @@ from config import Config
 from database import init_db
 from auth import register_user, login_user, verify_user_token, require_auth
 from workout import handle_generate_workout_plan
+from models import User, WorkoutPlan, WorkoutLog
 
 app = Flask(__name__)
 
