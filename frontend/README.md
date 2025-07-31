@@ -1,12 +1,73 @@
-# React + Vite
+# IntelliFit Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern, responsive web interface for the IntelliFit fitness application.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Responsive design with fitness-themed aesthetics
+- JWT token-based authentication
+- Login and registration forms
+- Protected dashboard
+- Real-time form validation
+- Modern CSS with gradients and animations
 
-## Expanding the ESLint configuration
+## Files
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `index.html` - Entry point (redirects to login)
+- `login.html` - User login page
+- `register.html` - User registration page
+- `dashboard.html` - Protected user dashboard
+- `styles.css` - Common styles and utilities
+
+## Setup
+
+1. Ensure the backend API is running at `http://127.0.0.1:5000`
+
+2. Open `index.html` in a web browser or serve the files using a local server:
+
+```bash
+# Using Python's built-in server
+python -m http.server 8080
+
+# Using Node.js http-server
+npx http-server -p 8080
+
+# Using Live Server extension in VS Code
+# Right-click on index.html and select "Open with Live Server"
+```
+
+3. Navigate to `http://localhost:8080` (or the appropriate port)
+
+## Features
+
+### Login Page
+- IntelliFit branding with custom tagline
+- Form validation
+- Token storage
+- Auto-redirect if already logged in
+
+### Registration Page  
+- Complete registration form
+- Password confirmation
+- Email validation
+- Real-time feedback
+
+### Dashboard
+- Protected route (requires authentication)
+- User welcome message
+- Fitness feature showcase
+- Secure logout
+
+## Design Theme
+
+- Gradient backgrounds (#667eea to #764ba2)
+- Modern glassmorphism effects
+- Responsive grid layouts
+- Smooth animations and transitions
+- Fitness-focused color scheme and iconography
+
+## Browser Compatibility
+
+- Modern browsers (Chrome, Firefox, Safari, Edge)
+- Mobile responsive design
+- ES6+ JavaScript features
