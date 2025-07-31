@@ -8,6 +8,7 @@ from database import init_db
 from auth import register_user, login_user, verify_user_token, require_auth
 from workout import handle_generate_workout_plan
 from models import User, WorkoutPlan, WorkoutLog
+from mongoengine import connect
 
 app = Flask(__name__)
 
@@ -15,6 +16,9 @@ app.config.from_object(Config)
 
 # Initialize database
 init_db(app)
+load_dotenv()
+MONGO_URI = os.getenv("MONGO_URI")
+connect(host=MONGO_URI)
 
 CORS(app)
 
