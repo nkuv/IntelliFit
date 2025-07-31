@@ -5,38 +5,38 @@ import { API_BASE_URL } from '../utils/api'; // Import API base URL
 const DashboardPage = () => {
   const [username, setUsername] = useState('User'); // Default username
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    const user = JSON.parse(localStorage.getItem('user') || '{}');
+//   useEffect(() => {
+//     const token = localStorage.getItem('token');
+//     const user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    if (!token) {
-      window.location.href = '/login'; // Redirect to login if no token
-      return;
-    }
+//     if (!token) {
+//       window.location.href = '/login'; // Redirect to login if no token
+//       return;
+//     }
 
-    // Verify token with backend
-    fetch(`${API_BASE_URL}/api/verify`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (!data.valid) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = '/login'; // Redirect if token invalid
-      } else {
-        setUsername(user.username || 'User'); // Set username from localStorage
-      }
-    })
-    .catch(() => {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location.href = '/login'; // Redirect on network error during verification
-    });
-  }, []); // Empty dependency array means this runs once on mount
+//     // Verify token with backend
+//     fetch(`${API_BASE_URL}/api/verify`, {
+//       method: 'POST',
+//       headers: {
+//         'Authorization': `Bearer ${token}`
+//       }
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//       if (!data.valid) {
+//         localStorage.removeItem('token');
+//         localStorage.removeItem('user');
+//         window.location.href = '/login'; // Redirect if token invalid
+//       } else {
+//         setUsername(user.username || 'User'); // Set username from localStorage
+//       }
+//     })
+//     .catch(() => {
+//       localStorage.removeItem('token');
+//       localStorage.removeItem('user');
+//       window.location.href = '/login'; // Redirect on network error during verification
+//     });
+//   }, []); // Empty dependency array means this runs once on mount
 
   const handleLogout = () => {
     localStorage.removeItem('token');
