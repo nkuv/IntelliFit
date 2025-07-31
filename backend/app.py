@@ -22,6 +22,12 @@ except Exception as e:
 
 app = Flask(__name__)
 
+# Configure the app
+app.config.from_object(Config)
+
+# Initialize database
+init_db(app)
+
 CORS(app)
 
 
