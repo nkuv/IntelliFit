@@ -1,3 +1,14 @@
+<!--
+  This is the login page for the IntelliFit web application.
+  It allows users to log in or register for an account.
+  The login form submits to the backend API for authentication.
+  The backend is not implemented yet
+  The backend is supposed to handle login requests and return a token.
+  The token is stored in localStorage for session management.
+  The user will be redirected to the dashboard upon successful login.
+  The dashboard is not implemented yet.
+  The login page also checks if the user is already logged in and redirects to the dashboard if so. 
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -234,7 +245,7 @@
                 return;
             }
 
-            // Add loading state
+
             document.body.classList.add('loading');
 
             try {
@@ -249,13 +260,11 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Store token in localStorage
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('user', JSON.stringify(data.user));
                     
                     showSuccess('Login successful! Redirecting...');
                     
-                    // Redirect to dashboard after a short delay
                     setTimeout(() => {
                         window.location.href = 'dashboard.html';
                     }, 1000);
@@ -266,16 +275,13 @@
                 showError('Network error. Please try again.');
                 console.error('Login error:', error);
             } finally {
-                // Remove loading state
                 document.body.classList.remove('loading');
             }
         });
 
-        // Check if user is already logged in
         window.addEventListener('load', () => {
             const token = localStorage.getItem('token');
             if (token) {
-                // Verify token with backend
                 fetch(`${API_BASE_URL}/api/verify`, {
                     method: 'POST',
                     headers: {
