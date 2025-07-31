@@ -1,0 +1,12 @@
+{
+  "name": "intellifit-backend",
+  "version": "1.0.0",
+  "description": "Intelligent Fitness Application Backend",
+  "scripts": {
+    "start": "python app.py",
+    "dev": "python app.py"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.0"
+  }
+}
