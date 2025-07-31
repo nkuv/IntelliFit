@@ -1,13 +1,45 @@
-<!doctype html>
+<!--
+  This is a starting point for the IntelliFit web application.
+  It's meant to redirect to the login page.
+  The login page isn't built yet.
+-->
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IntelliFit - AI-Powered Fitness</title>
+    <meta http-equiv="refresh" content="0; url=login.html">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .loading {
+            font-size: 1.2em;
+        }
+        .logo {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="logo">IntelliFit</div>
+        <div class="loading">Redirecting to login...</div>
+    </div>
+    <script>
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 1000);
+    </script>
+</body>
 </html>
